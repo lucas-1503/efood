@@ -14,9 +14,11 @@ import {
 } from './styles'
 import close from '../../assets/icons/close.png'
 import { useDispatch } from 'react-redux'
+import { addItem, open } from '../../store/reducers/cart'
 
 export type Props = {
   restaurant: Restaurant
+  pedido: Pedido
 }
 
 export const priceFormat = (price: number) => {
@@ -26,7 +28,7 @@ export const priceFormat = (price: number) => {
   }).format(price)
 }
 
-const FoodList = ({ restaurant }: Props) => {
+const FoodList = ({ restaurant, pedido }: Props) => {
   const [showModal, setShowModal] = useState(false)
   const [foodTitle, setfoodTitle] = useState('')
   const [foodDescription, setfoodDescription] = useState('')
@@ -37,6 +39,15 @@ const FoodList = ({ restaurant }: Props) => {
   const [foodId, setFoodId] = useState(0)
 
   const dispatch = useDispatch()
+  const addToCart = () => {
+    pedido.id = foodId
+    pedido.nome = foodTitle
+    pedido.foto = foodPhoto
+    pedido.preco = foodPrice
+    dispatch(addItem(pedido))
+    setShowModal(false)
+    dispatch(open())
+  }
 
   return (
     <>
@@ -76,6 +87,9 @@ const FoodList = ({ restaurant }: Props) => {
               {foodDescription}
               <p>Serve: {foodServe}</p>
             </FoodDescription>
+            <AddCartButton onClick={addToCart}>
+              Adicionar ao carrinho - {priceFormat(foodPrice)}
+            </AddCartButton>
           </ModalContainer>
           <CloseIcon
             onClick={() => setShowModal(false)}

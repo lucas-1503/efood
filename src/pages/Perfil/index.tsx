@@ -19,7 +19,15 @@ const Perfil = () => {
       <>
         <Header />
         <Apresentacao restaurant={restaurantFood} />
-        <FoodList restaurant={restaurantFood} />
+        <FoodList
+          restaurant={restaurantFood}
+          pedido={{
+            id: 0,
+            nome: '',
+            foto: '',
+            preco: 0
+          }}
+        />
         <Footer />
       </>
     )

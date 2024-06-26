@@ -1,3 +1,10 @@
+declare type Pedido = {
+  id: number
+  nome: string
+  foto: string
+  preco: number
+}
+
 declare type Restaurant = {
   id: number
   titulo: string

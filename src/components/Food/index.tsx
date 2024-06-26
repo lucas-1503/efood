@@ -23,7 +23,7 @@ const Food = ({
       <Photo src={FoodPhoto} alt={FoodPhotoAlt} />
       <Title>{FoodTitle}</Title>
       <Description>{reduceDescription(FoodDescription)}</Description>
-      <AddCartButton to={''}>Adicionar ao carrinho</AddCartButton>
+      <AddCartButton to={''}>Mais detalhes</AddCartButton>
     </Card>
   )
 }
