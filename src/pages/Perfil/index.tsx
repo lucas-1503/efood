@@ -4,6 +4,7 @@ import Apresentacao from '../../components/Apresentacao'
 import FoodList from '../../components/FoodList'
 import Footer from '../../components/Footer'
 import { useGetRestaurantSelectedQuery } from '../../services/api'
+import Cart from '../../components/Cart'
 import Loader from '../../components/Loader'
 
 type RestaurantParams = {
@@ -29,6 +30,7 @@ const Perfil = () => {
           }}
         />
         <Footer />
+        <Cart />
       </>
     )
   }
