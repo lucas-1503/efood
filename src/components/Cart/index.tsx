@@ -12,8 +12,9 @@ import {
   CartStage
 } from './styles'
 import { RootReducer } from '../../store'
-import { close, removeItem } from '../../store/reducers/cart'
+import { close, removeItem, startCheckout } from '../../store/reducers/cart'
 import { priceFormat } from '../FoodList'
+import Checkout from '../Checkout'
 
 const Cart = () => {
   const { isOpen, pedido, isAddress, isCart } = useSelector(
@@ -22,6 +23,13 @@ const Cart = () => {
   const dispatch = useDispatch()
   const openCart = () => {
     dispatch(close())
+  }
+  const activeCheckout = () => {
+    if (getTotalPrice() > 0) {
+      dispatch(startCheckout())
+    } else {
+      alert('Não há itens no carrinho')
+    }
   }
 
   const getTotalPrice = () => {
@@ -53,8 +61,11 @@ const Cart = () => {
             <p>Valor total</p>
             <span>{priceFormat(getTotalPrice())}</span>
           </InfosCart>
-          <AddCartButton>Continuar com a esntrega</AddCartButton>
+          <AddCartButton onClick={activeCheckout}>
+            Continuar com a entrega
+          </AddCartButton>
         </CartStage>
+        <Checkout checkoutStart={isAddress} priceTotal={getTotalPrice()} />
       </Sidebar>
     </CartContainer>
   )
